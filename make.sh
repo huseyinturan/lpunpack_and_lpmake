@@ -5,7 +5,7 @@ CC=clang
 CPP=clang++
 AR=ar
 STRIP=strip
-CFLAGS=-static
+CFLAGS=
 
 cd lib
 cd liblog
@@ -530,15 +530,18 @@ case "$OSTYPE" in
   ;;
 esac
 
-${CPP} -std=c++17 -I../lib/include ${CFLAGS} -D_FILE_OFFSET_BITS=64 -o ../bin/lpmake lpmake.cc ../lib/lib/liblp.a ../lib/lib/libsparse.a ../lib/lib/libext4_utils.a ../lib/lib/libz.a ../lib/lib/libbase.a ../lib/lib/fmtlib.a ../lib/lib/liblog.a ../lib/lib/libcrypto_utils.a ../lib/lib/libcrypto.a -lpthread ${LDFLAGS}
+LIBRARY_PATH="/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib"  # Adjust this path as necessary
 
-${CPP} -std=c++17 -I../lib/include ${CFLAGS} -D_FILE_OFFSET_BITS=64 -o ../bin/lpadd lpadd.cc ../lib/lib/liblp.a ../lib/lib/libsparse.a ../lib/lib/libext4_utils.a ../lib/lib/libz.a ../lib/lib/libbase.a ../lib/lib/fmtlib.a ../lib/lib/liblog.a ../lib/lib/libcrypto_utils.a ../lib/lib/libcrypto.a -lpthread ${LDFLAGS}
 
-${CPP} -std=c++17 -I../lib/include ${CFLAGS} -D_FILE_OFFSET_BITS=64 -o ../bin/lpflash lpflash.cc ../lib/lib/liblp.a ../lib/lib/libsparse.a ../lib/lib/libext4_utils.a ../lib/lib/libz.a ../lib/lib/libbase.a ../lib/lib/fmtlib.a ../lib/lib/liblog.a ../lib/lib/libcrypto_utils.a ../lib/lib/libcrypto.a -lpthread ${LDFLAGS}
+${CPP} -std=c++17 -I../lib/include ${CFLAGS} -D_FILE_OFFSET_BITS=64 -o ../bin/lpmake lpmake.cc ../lib/lib/liblp.a ../lib/lib/libsparse.a ../lib/lib/libext4_utils.a ../lib/lib/libz.a ../lib/lib/libbase.a ../lib/lib/fmtlib.a ../lib/lib/liblog.a ../lib/lib/libcrypto_utils.a ../lib/lib/libcrypto.a -lpthread -L${LIBRARY_PATH} ${LDFLAGS}
 
-${CPP} -std=c++17 -I../lib/include ${CFLAGS} -D_FILE_OFFSET_BITS=64 -o ../bin/lpunpack lpunpack.cc ../lib/lib/liblp.a ../lib/lib/libsparse.a ../lib/lib/libext4_utils.a ../lib/lib/libz.a ../lib/lib/libbase.a ../lib/lib/fmtlib.a ../lib/lib/liblog.a ../lib/lib/libcrypto_utils.a ../lib/lib/libcrypto.a -lpthread ${LDFLAGS}
+${CPP} -std=c++17 -I../lib/include ${CFLAGS} -D_FILE_OFFSET_BITS=64 -o ../bin/lpadd lpadd.cc ../lib/lib/liblp.a ../lib/lib/libsparse.a ../lib/lib/libext4_utils.a ../lib/lib/libz.a ../lib/lib/libbase.a ../lib/lib/fmtlib.a ../lib/lib/liblog.a ../lib/lib/libcrypto_utils.a ../lib/lib/libcrypto.a -lpthread -L${LIBRARY_PATH} ${LDFLAGS}
 
-${CPP} -std=c++17 -I../lib/include ${CFLAGS} -D_FILE_OFFSET_BITS=64 -o ../bin/lpdump lpdump.cc dynamic_partitions_device_info.pb.cc lpdump_host.cc ../lib/lib/liblp.a ../lib/lib/libsparse.a ../lib/lib/libext4_utils.a ../lib/lib/libz.a ../lib/lib/libbase.a ../lib/lib/fmtlib.a ../lib/lib/liblog.a ../lib/lib/libcrypto_utils.a ../lib/lib/libcrypto.a ../lib/lib/libjsonpbparse.a ../lib/lib/libprotobuf-cpp-full.a -lpthread ${LDFLAGS}
+${CPP} -std=c++17 -I../lib/include ${CFLAGS} -D_FILE_OFFSET_BITS=64 -o ../bin/lpflash lpflash.cc ../lib/lib/liblp.a ../lib/lib/libsparse.a ../lib/lib/libext4_utils.a ../lib/lib/libz.a ../lib/lib/libbase.a ../lib/lib/fmtlib.a ../lib/lib/liblog.a ../lib/lib/libcrypto_utils.a ../lib/lib/libcrypto.a -lpthread -L${LIBRARY_PATH} ${LDFLAGS}
+
+${CPP} -std=c++17 -I../lib/include ${CFLAGS} -D_FILE_OFFSET_BITS=64 -o ../bin/lpunpack lpunpack.cc ../lib/lib/liblp.a ../lib/lib/libsparse.a ../lib/lib/libext4_utils.a ../lib/lib/libz.a ../lib/lib/libbase.a ../lib/lib/fmtlib.a ../lib/lib/liblog.a ../lib/lib/libcrypto_utils.a ../lib/lib/libcrypto.a -lpthread -L${LIBRARY_PATH} ${LDFLAGS}
+
+${CPP} -std=c++17 -I../lib/include ${CFLAGS} -D_FILE_OFFSET_BITS=64 -o ../bin/lpdump lpdump.cc dynamic_partitions_device_info.pb.cc lpdump_host.cc ../lib/lib/liblp.a ../lib/lib/libsparse.a ../lib/lib/libext4_utils.a ../lib/lib/libz.a ../lib/lib/libbase.a ../lib/lib/fmtlib.a ../lib/lib/liblog.a ../lib/lib/libcrypto_utils.a ../lib/lib/libcrypto.a ../lib/lib/libjsonpbparse.a ../lib/lib/libprotobuf-cpp-full.a -lpthread -L${LIBRARY_PATH} ${LDFLAGS}
 
 cd ..
 rm -rf lib/lib
